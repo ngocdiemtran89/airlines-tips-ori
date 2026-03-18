@@ -81,7 +81,49 @@ body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--cha
 @media(max-width:480px){.airline-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
-<body>
+<body><style>
+#loginOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#1a1f3a 0%,#0d1126 50%,#1a1f3a 100%);z-index:9999;display:flex;align-items:center;justify-content:center}
+#loginBox{background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.3);border-radius:20px;padding:48px 40px;text-align:center;backdrop-filter:blur(10px);max-width:380px;width:90%}
+#loginBox .logo{font-size:56px;margin-bottom:16px}
+#loginBox h2{color:#fff;font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:1px}
+#loginBox .sub{color:rgba(201,168,76,0.8);font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-bottom:32px}
+#loginBox input{width:100%;padding:14px 18px;border:1.5px solid rgba(201,168,76,0.3);border-radius:10px;background:rgba(255,255,255,0.08);color:#fff;font-size:16px;outline:none;text-align:center;letter-spacing:6px;transition:all .25s;font-family:Arial}
+#loginBox input:focus{border-color:#c9a84c;box-shadow:0 0 0 3px rgba(201,168,76,0.15)}
+#loginBox input::placeholder{color:rgba(255,255,255,0.3);letter-spacing:1px;font-size:14px}
+#loginBtn{width:100%;margin-top:14px;padding:14px;background:linear-gradient(135deg,#c9a84c,#a68a3e);border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all .25s;text-transform:uppercase}
+#loginBtn:hover{opacity:0.9;transform:translateY(-1px)}
+#loginError{color:#ff6b6b;font-size:13px;margin-top:14px;display:none;animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+</style>
+<div id="loginOverlay">
+  <div id="loginBox">
+    <div class="logo">✈</div>
+    <h2>ORI Aviation</h2>
+    <p class="sub">Airlines Interview Keywords</p>
+    <input type="password" id="pwdInput" placeholder="Nhập mật khẩu..." onkeydown="if(event.key==='Enter')checkPwd()">
+    <button id="loginBtn" onclick="checkPwd()">Đăng Nhập</button>
+    <div id="loginError">❌ Mật khẩu không đúng. Vui lòng thử lại.</div>
+  </div>
+</div>
+<script>
+document.body.style.overflow="hidden";
+setTimeout(function(){document.getElementById("pwdInput").focus();},100);
+function checkPwd(){
+  if(document.getElementById("pwdInput").value==="ori2013"){
+    document.getElementById("loginOverlay").style.display="none";
+    document.body.style.overflow="auto";
+  } else {
+    var err=document.getElementById("loginError");
+    err.style.display="block";
+    err.style.animation="none";
+    err.offsetHeight;
+    err.style.animation="shake .3s";
+    document.getElementById("pwdInput").value="";
+    document.getElementById("pwdInput").focus();
+  }
+}
+</script>
+
 <div class="hero">
 <div class="brand-tag">ORI TOEIC Dream Job</div>
 <h1>Airline Interview <span>Keywords</span></h1>
